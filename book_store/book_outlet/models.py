@@ -11,7 +11,11 @@ class Book(models.Model):
         validators=[MinValueValidator(0), MaxValueValidator(5)]) #raiting: valutazione
     author = models.CharField(null=True, max_length=100)
     is_bestselling = models.BooleanField(default=False)
-    slug = models.SlugField(default="", null=False)
+    slug = models.SlugField(default="", null=False) # editable=Flase, SIGNIFICA CHE IL CAMPO NON PUO' ESSERE MODIFICATO
+                                                                                # blank=True, SIGNIFICA CHE IL CAMPO PUO' ESSERE VUOTO
+    
+    def __str__(self):
+        return f"{self.title}" # QUESTO SERVE PER RENDERE VISIBILE IL TITOLO SU /ADMIN/
     
     def get_absolute_url(self):
         return reverse("book-detail", args=[self.slug])
