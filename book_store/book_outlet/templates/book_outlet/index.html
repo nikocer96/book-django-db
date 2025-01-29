@@ -1,0 +1,15 @@
+{% extends "book_outlet/base.html" %}
+
+{% block title %} All Book {% endblock %}
+
+{% block content %}
+    <ul>
+        {% for book in books %}
+            <!-- <a href="{% url "book-detail" book.id %}"><li>{{ book.title }}</li><a/> -->
+            <!-- OPPURE ANDARE IN MODELS.PY E AGGIUNGERE LA FUNZIONE get_absolute_url -->
+            <a href="{{ book.get_absolute_url }}"><li>{{ book.title }}</li><a/>
+              
+            <br>
+        {% endfor %}
+    </ul>
+{% endblock %}
