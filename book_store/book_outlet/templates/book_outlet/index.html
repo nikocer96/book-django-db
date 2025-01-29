@@ -7,9 +7,10 @@
         {% for book in books %}
             <!-- <a href="{% url "book-detail" book.id %}"><li>{{ book.title }}</li><a/> -->
             <!-- OPPURE ANDARE IN MODELS.PY E AGGIUNGERE LA FUNZIONE get_absolute_url -->
-            <a href="{{ book.get_absolute_url }}"><li>{{ book.title }}</li><a/>
-              
+            <a href="{{ book.get_absolute_url }}"><li>{{ book.title }}</li><a/> 
             <br>
         {% endfor %}
     </ul>
+    <p>Total number of Books: {{ num_books }}</p>
+    <p>Avg: {{ avg_rating.rating__avg }}</p>
 {% endblock %}
