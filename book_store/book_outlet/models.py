@@ -5,10 +5,26 @@ from django.utils.text import slugify
 
 # Create your models here.
 
+class Country(models.Model):
+    name = models.CharField(max_length=80)
+    code = models.CharField(max_length=2)
+    
+    def __str__(self):
+        return f"{self.name}, {self.code}"
+    
+    class Meta:
+        verbose_name_plural = "Country"
+    
 class Address(models.Model):
     street = models.CharField(max_length=80)
     postal_code = models.CharField(max_length=5)
     city = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return f"{self.street}, {self.postal_code}, {self.city}"
+    
+    class Meta:
+        verbose_name_plural = "Address"
 
 class Author(models.Model):
     first_name = models.CharField(max_length=100)
@@ -28,6 +44,7 @@ class Book(models.Model):
     is_bestselling = models.BooleanField(default=False)
     slug = models.SlugField(default="", null=False) # editable=Flase, SIGNIFICA CHE IL CAMPO NON PUO' ESSERE MODIFICATO
                                                                                 # blank=True, SIGNIFICA CHE IL CAMPO PUO' ESSERE VUOTO
+    published_countries = models.ManyToManyField(Country)
     
     def __str__(self):
         return f"{self.title}" # QUESTO SERVE PER RENDERE VISIBILE IL TITOLO SU /ADMIN/
